@@ -1,0 +1,9 @@
+{{ form_start(form, {'attr': {'class' : 'fs-5 fw-bolder'} }) }}
+{{ form_row(form.nom, {class : 'text-white', label : 'Nom'})}}
+{{ form_row(form.description, { label: 'Description'})}}
+{{ form_row(form.couleur, {label: 'Couleur'}) }}
+{{ form_row(form.niveau, {label: 'Niveau'}) }}
+{{ form_row(form.image, {label: 'Image'}) }}
+{{ form_row(form.prix, {label: 'Prix'}) }}
+<button type="submit" class="btn btn-success montserrat fs-6">Ajouter ces chaussures</button>
+{{ form_end(form) }}

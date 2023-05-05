@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN - Ajouter un nouvel article de blog
+{% endblock %}
+
+{% block body %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<header class="w-50 mx-auto text-center">
+			<h1>Ajout d'un nouvel article de blog</h1>
+		</header>
+
+		<main class="w-50 mx-auto">
+			{{ include('articles/_form.html.twig') }}
+		</main>
+	{% else %}
+		<div class="alert alert-danger w-50 mx-auto text-center my-3">
+			<p class="fs-1">Il semblerait que vous vous soyez perdu...</p>
+			<a class="btn btn-dark my-3 fs-3" href="{{ path('app_home') }}">Retourner à l'accueil</a>
+		</div>
+
+	{% endif %}
+{% endblock %}

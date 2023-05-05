@@ -1,0 +1,337 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN
+{% endblock %}
+
+{% block body %}
+	<header class="bg-header">
+		<section class="container">
+			{% if not app.user %}
+				{# si l'utilisateur n'est pas connecté, renvoie sur la page de connexion #}
+				<section class="w-75 mx-auto text-center">
+					<h1 class="fw-trouver-chaussure helvetica text-uppercase text-dark pt-3">
+						<p class="ls-10">Trouvez la chaussure</p>
+						{# permet de scinder le texte #}
+
+						<div class="helvetica">
+							<div class="msg p-1">
+								<span id="parfaite-texte"></span>
+							</div>
+						</div>
+					</h1>
+					<br>
+					<p class="basket montserrat align-center pe-2">
+						<i class="bi bi-arrow-right"></i>
+						Testez en cliquant sur la basket</p>
+
+				</section>
+
+				<section class="img-on-top">
+					<div class="baskets-top mx-auto">
+						<a href="{{ path('app_login') }}">
+							<div class="wrapper">
+								<img src="img/baskets-header.png" alt="Baskets RUN"/>
+							</div>
+						</a>
+						<img src="img/baskets-header-run.png" class="chaussure-animation" alt="Baskets RUN"/>
+					</div>
+				</section>
+			{% elseif app.user %}
+				{% if app.user.niveau is null %}
+					{# si l'utilisateur est connecté et n'a pas rempli ses infos, renvoie sur la page du formulaire #}
+					<section class="w-75 mx-auto text-center">
+						<h1 class="fw-trouver-chaussure helvetica text-uppercase text-dark pt-3">
+							<p>Trouvez la chaussure</p>
+							{# permet de scinder le texte #}
+
+							<div class="helvetica">
+								<div class="msg p-1">
+									<span id="parfaite-texte"></span>
+								</div>
+							</div>
+							<br>
+							<p class="basket montserrat align-center pe-2">
+								<i class="bi bi-arrow-right"></i>
+								Testez en cliquant sur la basket</p>
+						</h1>
+					</section>
+
+					<section class="img-on-top">
+						<div class="baskets-top mx-auto">
+							<a href="{{ path('app_form_complet', {'id': app.user.id}) }}">
+								<div class="wrapper">
+									<img src="img/baskets-header.png" alt="Baskets RUN"/>
+								</div>
+							</a>
+							<img src="img/baskets-header-run.png" class="chaussure-animation" alt="Baskets RUN"/>
+						</div>
+					</section>
+
+
+				{% elseif app.user.niveau == 0 and app.user.genre == 0 %}
+					{# chaussures conseillées aux personnes ayant un niveau débutant et étant des hommes #}
+
+					<div class="row">
+						<div class="col-6 col-lg-4 py-5 m-auto">
+							<img class="img-fluid" style="height:300px" src="img/niveau-debutant.png" alt="Baskets RUN"/>
+						</div>
+						<div class="col-6 col-lg-8 py-5 m-auto fs-5">
+							<h2>La chaussure qui semble adaptée pour vous est ...</h2>
+							<p>
+								<strong class="fs-2">La Carbon X 3</strong>, qui offre une foulée encore plus propulsive que la version précédente grâce à une semelle intermédiaire en mousse dynamisée, prend un nouveau départ avec une tige inédite. Retravaillée avec une maille de performance haut de gamme pour un meilleur ajustement, cette chaussure d’endurance conserve la plaque en fibre de carbone réactive et le profil de semelle incurvé sous les métas incisif. Compétitrice hors du commun, elle présente un motif de couleur asymétrique et audacieux qui ne manquera pas de faire impression sur la ligne d’arrivée.
+							</p>
+							<p>
+								<a class="fs-2 text-dark link-underline-dark link-offset-2" href="http://localhost:4000/chaussures/15">
+									<button class="bouton-voir">
+										<span class="actual-text">&nbsp;Voir&nbsp;</span>
+										<span class="hover-text" aria-hidden="true">&nbsp;Voir&nbsp;</span>
+									</button>
+								</a>
+							</p>
+						</div>
+					</div>
+
+				{% elseif app.user.niveau == 0 and app.user.genre == 1 %}
+					{# chaussures conseillées aux personnes ayant un niveau débutant et étant des femmes #}
+
+					<div class="row">
+						<div class="col-6 col-lg-4 py-5 m-auto">
+							<img class="img-fluid" style="height:300px" src="img/niveau-debutant-f.png" alt="Baskets RUN"/>
+						</div>
+						<div class="col-6 col-lg-8 py-5 m-auto fs-5">
+							<h2>La chaussure qui semble adaptée pour vous est ...</h2>
+							<p>
+								<strong class="fs-2">La Edge Lux 5</strong>, avec sa semelle Boune pour amortir vos pas et vous procurer une sensation de légèreté, est idéale pour bien commencer à courir, vous vous entraînerez avec dynamisme et énergie.
+							</p>
+							<p>
+								<a class="fs-2 text-dark link-underline-dark link-offset-2" href="http://localhost:4000/chaussures/19">
+									<button class="bouton-voir">
+										<span class="actual-text">&nbsp;Voir&nbsp;</span>
+										<span class="hover-text" aria-hidden="true">&nbsp;Voir&nbsp;</span>
+									</button>
+								</a>
+							</p>
+						</div>
+					</div>
+
+
+				{% elseif app.user.niveau == 1 and app.user.genre == 0 %}
+					{# chaussures conseillées aux personnes ayant un niveau intermédiaire et étant des hommes #}
+
+					<div class="row">
+						<div class="col-6 col-lg-4 py-5 m-auto">
+							<img style="height:300px" class="img-fluid" src="img/niveau-intermediaire.png" alt="Baskets RUN"/>
+						</div>
+						<div class="col-6 col-lg-8 py-5 m-auto fs-5">
+
+							<h2>La chaussure qui semble adaptée pour vous est ...</h2>
+							<p>
+								<strong class="fs-2">La ASICS GEL-NIMBUS 25</strong>
+								donne l'impression de rebondir sur un nuage. Cette chaussure de running neutre est repensée avec de nouveaux matériaux pour des courses plus douces et plus fluides. Une tige en maille douce enveloppe confortablement votre pied et offre une aération optimale. Sa nouvelle structure montante en maille offre une flexibilité optimale et entoure la cheville pour un confort et un chaussant parfaits. La semelle intermédiaire est dotée de l'amorti le plus dense parmi les modèles proposés à ce jour. Grâce à la mousse FF BLAST™PLUS ECO, cette basket légère offre un amorti moelleux, et un impact réduit sur l'environnement.
+							</p>
+							<p>
+								<a class="fs-2 text-dark link-underline-dark link-offset-2" href="http://localhost:4000/chaussures/14">
+									<button class="bouton-voir">
+										<span class="actual-text">&nbsp;Voir&nbsp;</span>
+										<span class="hover-text" aria-hidden="true">&nbsp;Voir&nbsp;</span>
+									</button>
+								</a>
+							</p>
+						</div>
+					</div>
+
+				{% elseif app.user.niveau == 1 and app.user.genre == 1 %}
+					{# chaussures conseillées aux personnes ayant un niveau intermédiaire et étant des femmes #}
+
+					<div class="row">
+						<div class="col-6 col-lg-4 py-5 m-auto">
+							<img style="height:300px" class="img-fluid" src="img/niveau-intermediaire-f.png" alt="Baskets RUN"/>
+						</div>
+						<div class="col-6 col-lg-8 py-5 m-auto fs-5">
+
+							<h2>La chaussure qui semble adaptée pour vous est ...</h2>
+							<p>
+								<strong class="fs-2">La Nike Zoom Fly 5</strong>
+								vous accompagne partout, de vos runs quotidiens jusqu'à la ligne d'arrivée de votre course préférée. Confortable et fiable, elle offre une sensation de propulsion pour une foulée rapide et énergique. Ce niveau de polyvalence est rare dans l'univers du running. Mais qui a dit qu'on ne pouvait pas tout avoir ?
+							</p>
+							<p>
+								<a class="fs-2 text-dark link-underline-dark link-offset-2" href="http://localhost:4000/chaussures/18">
+									<button class="bouton-voir">
+										<span class="actual-text">&nbsp;Voir&nbsp;</span>
+										<span class="hover-text" aria-hidden="true">&nbsp;Voir&nbsp;</span>
+									</button>
+								</a>
+							</p>
+						</div>
+					</div>
+
+
+				{% elseif app.user.niveau == 2 and app.user.genre == 0 %}
+					{# chaussures conseillées aux personnes ayant un niveau avancé et étant des hommes #}
+
+					<div class="row">
+						<div class="col-6 col-lg-4 py-5 m-auto">
+							<img style="height:300px" class="img-fluid" src="img/niveau-avance.webp" alt="Baskets RUN"/>
+						</div>
+						<div class="col-6 col-lg-8 py-5 m-auto fs-5">
+							<h2>La chaussure qui semble adaptée pour vous est ...</h2>
+							<p>
+								<strong class="fs-2">La Hyperion Elite 3</strong>
+								est ultra-légère et rapide. Cette chaussure de running sur route avancée est conçue pour te permettre de courir efficacement à vitesse de course et comprend une plaque en carbone qui te propulse vers l’avant à chaque foulée.
+							</p>
+							<p>
+								<a class="fs-2 text-dark link-underline-dark link-offset-2" href="http://localhost:4000/chaussures/2">
+									<button class="bouton-voir">
+										<span class="actual-text">&nbsp;Voir&nbsp;</span>
+										<span class="hover-text" aria-hidden="true">&nbsp;Voir&nbsp;</span>
+									</button>
+								</a>
+							</p>
+						</div>
+					</div>
+
+				{% elseif app.user.niveau == 2 and app.user.genre == 1 %}
+					{# chaussures conseillées aux personnes ayant un niveau avancé et étant des femmes #}
+
+					<div class="row">
+						<div class="col-6 col-lg-4 py-5 m-auto">
+							<img style="height:300px" class="img-fluid" src="img/niveau-avance-f.png" alt="Baskets RUN"/>
+						</div>
+						<div class="col-6 col-lg-8 py-5 m-auto fs-5">
+							<h2>La chaussure qui semble adaptée pour vous est ...</h2>
+							<p>
+								<strong class="fs-2">La Hoka Speedgoat 5</strong>
+								est parfaite sur les terrains techniques. Cette chaussure d'extérieur est conçue pour exceller sur les sentiers accidentés, isolés et à haute altitude grâce à sa semelle extérieure Vibram Megagrip exceptionnelle et à ses crampons multidirectionnels qui offrent une adhérence inégalée sur n'importe quelle surface.
+							</p>
+							<p>
+								<a class="fs-2 text-dark link-underline-dark link-offset-2" href="http://localhost:4000/chaussures/17">
+									<button class="bouton-voir">
+										<span class="actual-text">&nbsp;Voir&nbsp;</span>
+										<span class="hover-text" aria-hidden="true">&nbsp;Voir&nbsp;</span>
+									</button>
+								</a>
+							</p>
+						</div>
+					</div>
+				{% endif %}
+			{% endif %}
+		</section>
+	</header>
+
+	<main>
+		<section class="img-background-home">
+
+			<h2 class="py-3 text-uppercase text-white fw-bold text-you-just-have-to-run futura">
+				<p class="you">You</p>
+				<p class="just">just</p>
+				<p class="have">have</p>
+				<p class="to-run">to run</p>
+			</h2>
+
+			<a class="btn-inscription montserrat letter-spacing-1 me-auto" href=" {{ path('app_register') }} ">Devenir membre</a>
+		</section>
+		<section class="bg-gris-bleu">
+
+			<h2 class="hr py-5 text-uppercase">Nos conseils</h2>
+
+			<section class="container">
+
+				<article class="row">
+					{% for article in articles %}
+						<div class="col-6 col-lg-4 mt-2">
+							<a class="img-wrapper" href="{{ path('app_article_show', {'id': article.id}) }}">
+								<img src="{{ article.image }}" class="article-img" alt="Article course à pied RUN">
+							</a>
+							<a class="tdn article-title" href="{{ path('app_article_show', {'id': article.id}) }}">
+								<h3 class="mt-2 text-center text-uppercase">{{ article.titre }}</h3>
+							</a>
+						</div>
+
+						<div class="col-6 col-lg-8 mt-2">
+							<p class="helvetica">{{ article.contenu|striptags|slice(0, 500) }}...
+								<br><br>
+								<a href="{{ path('app_article_show', {'id': article.id}) }}">
+									<button class="bouton-voir">
+										<span class="actual-text">&nbsp;Lire&nbsp;</span>
+										<span class="hover-text" aria-hidden="true">&nbsp;Lire&nbsp;</span>
+									</button>
+								</a>
+							</p>
+
+							<p class="helvetica">Écrit par
+								<em class="text-bleu-fonce fw-bold">
+									{{ article.auteur }}</em>
+								le
+								{{ article.dateCreation|date('d/m/Y') }}
+							</p>
+						</div>
+
+						{% if not loop.last %}
+							{# j'affiche un <hr> en dessous de tous les articles, sauf le dernier #}
+							<hr>
+						{% endif %}
+					{% endfor %}
+				</article>
+			</section>
+		</section>
+
+		<section class="radius-bot-articles"></section>
+		{# affichage style vague #}
+
+		<h2 class="text-center fs-1 my-3">En savoir plus sur sa foulée</h2>
+
+		<div class="w-50 mx-auto">
+			<div id="carouselExampleDark" class="carousel carousel-dark slide">
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				</div>
+				<div class="carousel-inner">
+
+					<div class="carousel-item active" data-bs-interval="10000">
+						<div class="position-relative">
+							<img class="img-fluid d-block w-100" src="https://www.asics.com/dw/image/v2/BBTN_PRD/on/demandware.static/-/Library-Sites-shared-eu-library/default/dw8282d78f/1_asics/article-tile-large/asics-pronation-supinators-lp-largetile-06232020-1.gif" alt="image foulée supinateur course run running">
+							<h5 class="bg-vert-carousel p-2 text-white fs-1 w-50 mx-auto text-center montserrat position-absolute top-50px start-50 translate-middle-x">Supinateurs</h5>
+						</div>
+						<div class="carousel-caption d-none d-md-block carousel-text">
+							<p class="w-75 mx-auto">Le côté extérieur du talon touche le sol à un angle supérieur avec un peu ou pas de roulis vers l'intérieur (pronation) : cela entraîne une forte diffusion des chocs dans le bas de la jambe.</p>
+						</div>
+					</div>
+
+					<div class="carousel-item" data-bs-interval="2000">
+						<div class="position-relative">
+							<img class="img-fluid" src="https://www.asics.com/dw/image/v2/BBTN_PRD/on/demandware.static/-/Library-Sites-shared-eu-library/default/dw8282d78f/1_asics/article-tile-large/asics-pronation-supinators-lp-largetile-06232020-1.gif" class="d-block w-100" alt="image foulée supinateur course run running">
+							<h5 class="bg-vert-carousel p-2 text-white fs-1 w-50 mx-auto text-center montserrat position-absolute top-50px start-50 translate-middle-x">Neutres</h5>
+						</div>
+						<div class="carousel-caption d-none d-md-block carousel-text-2">
+							<p class="w-75 mx-auto">Le pied atterit sur la partie extérieure du talon, puis s'enroule vers l'intérieur (pronation) pour absorber les chocs et soutenir le poids du corps.</p>
+						</div>
+					</div>
+
+					<div class="carousel-item">
+						<div class="position-relative">
+							<img class="img-fluid d-block w-100" src="https://www.asics.com/dw/image/v2/BBTN_PRD/on/demandware.static/-/Library-Sites-shared-eu-library/default/dw8282d78f/1_asics/article-tile-large/asics-pronation-supinators-lp-largetile-06232020-1.gif" alt="image foulée supinateur course run running">
+							<h5 class="bg-vert-carousel p-2 text-white fs-1 w-50 mx-auto text-center montserrat position-absolute top-50px start-50 translate-middle-x">Surpronateurs</h5>
+						</div>
+						<div class="carousel-caption d-none d-md-block carousel-text">
+							<p class="w-75 mx-auto">Le pied atterit sur la partie extérieur du talon, puis s'enroule excessivement vers l'intérieur (pronation), transférant le poids vers le bord intérieur et non vers la pointe du pied.</p>
+						</div>
+					</div>
+
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+					<span title="Précédent" class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Précédent</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+					<span title="Suivant" class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Suivant</span>
+				</button>
+			</div>
+		</div>
+		<hr
+		class="container">
+	{# pour le footer #}
+	</main>
+{% endblock %}

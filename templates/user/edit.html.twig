@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN - Modifier mes informations
+{% endblock %}
+
+{% block body %}
+	<div class="img-background-creation">
+		<section class="col-8 col-md-6 mx-auto border-lg rounded-4 px-5 pb-5 form-opacity">
+			<header class="container text-white text-shadow text-center my-5">
+				<h1>Modification de vos informations</h1>
+			</header>
+
+			<main>
+				{{ form_start(form, {'attr': {'class' : 'text-white text-shadow fs-5 fw-bolder'} }) }}
+				{{ form_row(form.prenom, {class : 'text-white', label : 'Prénom'})}}
+				{{ form_row(form.nom, {label: 'Nom'})}}
+				{{ form_row(form.mail, {label: 'Adresse mail'}) }}
+				{{ form_row(form.genre, {label: 'Genre'}) }}
+				{{ form_row(form.niveau, {label: 'Niveau'}) }}
+				{{ form_row(form.age, {label: 'Âge'}) }}
+				<button type="submit" class="btn btn-success montserrat fs-6">Enregistrer les modifications</button>
+				{{ form_end(form) }}
+			</main>
+		</section>
+	</div>
+
+{% endblock %}

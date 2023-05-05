@@ -1,0 +1,125 @@
+<nav class="navbar sticky-top navbar-expand-lg bg-navbar" aria-label="Fourth navbar example">
+	<div class="container-fluid">
+		<a class="navbar-brand" href=" {{ path('app_home') }} "><img class="logo" src="{{ asset('img/run-logo.png') }}" alt="RUN logo"></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExample04">
+			<ul class="navbar-nav me-auto mb-2 mb-md-0">
+				<li class="hover-underline-animation nav-item me-3 text-uppercase fw-bold letter-spacing-1 mb-2">
+					<a class="nav-link text-dark" href="{{ path('app_home') }}">Accueil</a>
+				</li>
+
+				<li class="hover-underline-animation nav-item me-3 text-uppercase fw-bold letter-spacing-1 mb-2">
+					<a class="nav-link text-dark" href="{{ path('app_chaussures_index') }}">Chaussures</a>
+				</li>
+
+				{# Menu déroulant ARTICLES #}
+				<li class="nav-item dropdown me-3 mb-2">
+					<button class="nav-link btn-articles dropdown-toggle text-uppercase fw-bold letter-spacing-1 underline-blue" data-bs-toggle="dropdown" aria-expanded="false">
+						Conseils
+					</button>
+
+
+					<ul class="dropdown-menu shadow-sm list-unstyled">
+						<li>
+							<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_articles_alimentation') }}">
+								<span class="d-inline-block bg-bleu-fonce rounded-circle p-1"></span>
+								Alimentation
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_articles_entrainement') }}">
+								<span class="d-inline-block bg-bleu rounded-circle p-1"></span>
+								Entraînement
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_articles_sante') }}">
+								<span class="d-inline-block bg-vert-fonce rounded-circle p-1"></span>
+								Santé
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_articles_bienetre') }}">
+								<span class="d-inline-block bg-vert rounded-circle p-1"></span>
+								Bien-être
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_articles_index') }}">
+								<span class="d-inline-block bg-bleu-fonce rounded-circle p-1"></span>
+								Tous nos conseils
+							</a>
+						</li>
+					</ul>
+				</li>
+				{% if is_granted('ROLE_ADMIN') %}
+					{# Menu déroulant AJOUT pour les administrateurs #}
+					<li class="nav-item dropdown mb-2">
+						<button class="nav-link btn-articles dropdown-toggle text-uppercase fw-bold letter-spacing-1 underline-blue" data-bs-toggle="dropdown" aria-expanded="false">
+							Page admin
+						</button>
+
+
+						<ul class="dropdown-menu shadow-sm list-unstyled">
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_chaussures_new') }}">
+									<span class="d-inline-block bg-bleu-fonce rounded-circle p-1"></span>
+									Ajouter une paire de chaussure
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_articles_new') }}">
+									<span class="d-inline-block bg-bleu rounded-circle p-1"></span>
+									Ajouter un article sur le blog
+								</a>
+							</li>
+							<hr>
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2 py-2 text-uppercase fw-bold letter-spacing-1" href="{{ path('app_user_index') }}">
+									<span class="d-inline-block bg-vert rounded-circle p-1"></span>
+									Liste des utilisateurs
+								</a>
+							</li>
+						</ul>
+					</li>
+				{% endif %}
+			</ul>
+
+
+			<ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+				{% if app.user %}
+					{# si l'utilisateur est connecté #}
+					<li class="my-auto nav-item ms-3">
+						<p class="nav-link my-auto">
+							{{ app.user.prenom }}
+							{{ app.user.nom }}</p>
+					</li>
+
+					<li class="nav-item me-3 text-uppercase fw-bold letter-spacing-1">
+						<a class="nav-link text-dark" href="{{ path('app_user_show', {'id': app.user.id}) }}">
+							<i class='bx bx-lg bxs-user-circle' title="Mon Profil"></i>
+						</a>
+					</li>
+
+					<li class="my-auto nav-item ms-3">
+						<a class="btn-deconnexion" href="{{ path('app_logout') }}">Déconnexion
+						</a>
+					</li>
+
+				{% else %}
+					{# si l'utilisateur n'est pas connecté #}
+					<li class="my-auto nav-item ms-lg-3 hover-underline-animation fw-bold letter-spacing-1">
+						<a class="nav-link text-dark" href="{{ path('app_register') }}">Inscription</a>
+					</li>
+					<li class="my-auto nav-item ms-lg-3 fw-bold letter-spacing-1">
+						<a class="btn-connexion" href="{{ path('app_login') }}">Connexion</a>
+					</li>
+				{% endif %}
+				{# fin de la condition #}
+			</ul>
+		</div>
+	</div>
+</nav>

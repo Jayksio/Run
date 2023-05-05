@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN -
+	{{ chaussure.nom }}
+{% endblock %}
+
+{% block body %}
+	<header class="container text-center my-1">
+		<h1 class="text-center">
+			<strong class="text-uppercase">{{ chaussure.nom }}</strong>
+		</h1>
+	</header>
+
+	<main class="container">
+		<section class="row">
+			<div class="col-6">
+				<img class="img-fluid" src="{{ chaussure.image }}" alt="Image chaussures courses RUN">
+			</div>
+
+			<div class="col-6 centrage-vertical">
+				<p class="mb-3">{{ chaussure.description }}</p>
+				<p>La
+					<strong>{{ chaussure.nom }}</strong>
+					est une paire de basket adaptée pour les personnes
+					{% if chaussure.niveau == 0 %}
+						<strong>qui débutent</strong>.
+					{% elseif chaussure.niveau == 1 %}
+						<strong>qui ont un niveau intermédiaire/amateur</strong>.
+					{% elseif chaussure.niveau == 2 %}
+						<strong>qui ont un niveau confirmé</strong>.
+					{% endif %}
+				</p>
+
+				<strong class="fs-2">{{ chaussure.prix }}€</strong>
+			</div>
+		</section>
+
+
+		{% if is_granted('ROLE_ADMIN') %}
+
+			<section class="container">
+				<a class="btn btn-warning text-white my-3" href="{{ path('app_chaussures_edit', {'id': chaussure.id}) }}">Modifier</a>
+
+				{{ include('chaussures/_delete_form.html.twig') }}
+			</section>
+
+		{% endif %}
+	</main>
+{% endblock %}

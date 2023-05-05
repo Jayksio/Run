@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN - Chaussures
+{% endblock %}
+
+{% block body %}
+	<header>
+		<div class="video-background">
+			<div class="video-foreground">
+				<iframe src="https://www.youtube.com/embed/YSiYewXvlzU?controls=0&showinfo=0&autoplay=1&loop=1&mute=1&playlist=YSiYewXvlzU" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+
+		<div class="text-on-video mb-5">
+			<p class="text-uppercase mt-20 ms-5 helvetica fw-bold fs-1">Choisissez le meilleur</p>
+			<p class="w-text-sous-video ms-5 fs-5">Pour trouver des paires de chaussures adaptées à vos besoins, RUN s'engage à vous proposer des modèles de références.</p>
+			<a href="#chaussures-sous-video" class="btn-video fs-5 ms-5 tdn">
+				Découvrir
+			</a>
+		</div>
+	</header>
+
+	<main class="container" id="chaussures-sous-video">
+
+		<article class="row">
+
+			{% for chaussure in chaussures %}
+
+				<section class="col-12 col-md-6 col-lg-3">
+
+					<div style="height:500px;" {# image des cards égales #} class="card my-2">
+						<a class="img-wrapper-chaussures" href="{{ path('app_chaussures_show', {'id': chaussure.id}) }}">
+							<img src="{{ chaussure.image }}" style="height:300px; object-fit:contain;" class="card-img-top" alt="Chaussures RUN">
+						</a>
+						<div class="card-body">
+							<a class="titre-clic" href="{{ path('app_chaussures_show', {'id': chaussure.id}) }}">
+								<h5 class="card-title text-uppercase fw-bold">{{ chaussure.nom }}</h5>
+							</a>
+							<p class="text-start card-text">
+								Prix :
+								<strong>{{ chaussure.prix }}€</strong>
+							</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Niveau :
+
+								{% if chaussure.niveau == 0 %}
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star"></i>
+									<i class="bi bi-star"></i>
+								{% elseif chaussure.niveau == 1 %}
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star"></i>
+								{% elseif chaussure.niveau == 2 %}
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star-fill"></i>
+									<i class="bi bi-star-fill"></i>
+								{% endif %}
+							</li>
+
+							<li class="list-group-item">Couleur :
+								<strong>{{ chaussure.couleur }}</strong>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				{% else %}
+				{# ici je dois mettre quelque chose si je n'ai aucune info en DB #}
+			{% endfor %}
+		</article>
+	</main>
+{% endblock %}

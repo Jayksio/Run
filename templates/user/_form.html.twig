@@ -1,0 +1,12 @@
+{# {{ form_start(form) }}
+{{ form_widget(form) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+{{ form_start(form, {'attr': {'class' : 'fs-5 text-shadow text-white fw-bolder'} }) }}
+{{ form_row(form.prenom, {class : 'text-white', label : 'Prénom'})}}
+{{ form_row(form.nom, {label: 'Nom'}) }}
+{{ form_row(form.mail, {label: 'Adresse mail'}) }}
+{# {{ form_row(form.plainPassword, {label: 'Mot de passe'}) }} #}
+<button type="submit" class="btn-connexion-register montserrat fs-6">Créer son compte</button>
+{{ form_end(form) }}

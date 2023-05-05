@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta
+		name="description" content="Trouvez des chaussures et des conseils adaptés pour le running.">
+		<!-- SCRIPT CKEDITOR -->
+		<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+		<link
+		rel="icon" type="image/x-icon" href="{{ asset('/img/favicon.ico')}}">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+
+		{# Bootstrap CSS #}
+		<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+		{# Google Fonts - Montserrat & Open Sans #}
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+
+		{# CDNFonts - Futura / Helvetica / Verdana #}
+		<link href="https://fonts.cdnfonts.com/css/futura" rel="stylesheet">
+		<link href="https://fonts.cdnfonts.com/css/helvetica-2" rel="stylesheet">
+		<link
+		href="https://fonts.cdnfonts.com/css/verdana" rel="stylesheet">
+
+		{# BS Icons #}
+		<link
+		rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
+		{# Boxicons #}
+		<link
+		href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+		{# CSS #}
+		<link rel="stylesheet" href="{{ asset('css/style.css')}}">
+
+
+	</head>
+	<body>
+		{% include "nav.html.twig" %}
+
+		{% block body %}{% endblock %}
+
+		{% include "footer.html.twig" %}
+		{# Bootstrap JS #}
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+		<script src="js/script.js"></script>
+		<!-- SCRIPT CKEDITOR -->
+		<script>
+			ClassicEditor.create(document.querySelector('#contenu')).catch(error => {
+console.error(error);
+});
+
+CKEDITOR.on('#contenu', function (e) {
+e.editor.addCss('body { background-color: red; }');
+});
+		</script>
+	</body>
+</html>

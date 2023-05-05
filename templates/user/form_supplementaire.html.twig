@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN - Formulaire
+{% endblock %}
+
+{% block body %}
+	<div class="img-background-creation">
+		<section class="col-8 col-md-6 mx-auto border-lg rounded-4 px-5 pb-5 form-opacity">
+			<header class="container text-white text-shadow text-center my-5">
+				<h1>Compléter son profil</h1>
+			</header>
+
+			<main>
+				{{ form_start(UserCompletType, {'attr': {'class' : 'fs-5 text-shadow text-white fw-bolder'} }) }}
+				{{ form_row(UserCompletType.niveau, {label: 'Niveau'}) }}
+				{{ form_row(UserCompletType.genre, {label: 'Genre'}) }}
+				{{ form_row(UserCompletType.age, {label: 'Âge'}) }}
+				<button type="submit" class="btn-connexion-register montserrat fs-6">Trouver ma chaussure</button>
+				{{ form_end(UserCompletType) }}
+			</main>
+		</section>
+	</div>
+{% endblock %}

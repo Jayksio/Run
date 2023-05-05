@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN - Profil de
+	{{ app.user.username }}
+{% endblock %}
+
+{% block body %}
+	<header>
+		<h1 class="text-center">Bonjour
+			<strong class="text-bleu-fonce">{{ app.user.username }}</strong>
+			!
+		</h1>
+	</header>
+
+	<main class="container">
+		<section class="row">
+			<div class="card bg-gris-bleu text-center col-12 col-md-6 mx-auto mt-5 mb-5 card-border shadow">
+				<div class="card-body">
+					Mon profil
+				</div>
+
+				<div class="card-body">
+					<h5 class="card-title">
+						<strong>{{ app.user.prenom }}
+							{{ app.user.nom }}</strong>
+					</h5>
+				</div>
+
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item mb-2 bg-gris-bleu">
+						Nom d'utilisateur :
+						<strong>{{ app.user.username }}</strong>
+					</li>
+					<li class="list-group-item mb-2 bg-gris-bleu">
+						Mail :
+						<strong>{{ app.user.mail }}</strong>
+					</li>
+					<li class="list-group-item mb-2 bg-gris-bleu">
+						Niveau :
+						{% if app.user.niveau is null %}
+							<a href="{{ path('app_form_complet', {'id': user.id}) }}">Je complète mon profil !</a>
+						{% elseif app.user.niveau == 0 %}
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star"></i>
+							<i class="bi bi-star"></i>
+						{% elseif app.user.niveau == 1 %}
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star"></i>
+						{% else %}
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star-fill"></i>
+							<i class="bi bi-star-fill"></i>
+						{% endif %}
+					</li>
+					<li class="list-group-item mb-2 bg-gris-bleu">
+						Genre :
+						{% if app.user.genre is null %}
+							<a href="{{ path('app_form_complet', {'id': user.id}) }}">Je complète mon profil !</a>
+						{% elseif app.user.genre == 0 %}
+							<strong>Homme</strong>
+						{% else %}
+							<strong>Femme</strong>
+						{% endif %}
+					</li>
+					<li class="list-group-item mb-2 bg-gris-bleu">
+						Âge :
+						{% if app.user.age is null %}
+							<a href="{{ path('app_form_complet', {'id': user.id}) }}">Je complète mon profil !</a>
+						{% else %}
+							<strong>{{ app.user.age }}
+								ans</strong>
+						{% endif %}
+					</li>
+
+					<div class="card-body py-3 d-flex justify-content-evenly">
+						<a class="btn-deconnexion" href="{{ path('app_logout') }}">Déconnexion
+						</a>
+						<a class="btn-modification" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier mes informations</a>
+
+						{% if app.user.niveau is null or app.user.genre is null or app.user.age is null %}
+							<a class="btn-modification" href="{{ path('app_form_complet', {'id': user.id}) }}">Compléter mon profil</a>
+						{% endif %}
+					</div>
+				</div>
+			</section>
+		</main>
+
+
+	{% endblock %}

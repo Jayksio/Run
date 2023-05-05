@@ -1,0 +1,14 @@
+{# {{ form_start(form) }}
+{{ form_widget(form) }}
+<button class="btn btn-success">{{ button_label|default('Ajouter cet article au blog') }}</button>
+{{ form_end(form) }}
+ #}
+
+{{ form_start(form, {'attr': {'class' : 'fs-5 fw-bolder'} }) }}
+{{ form_row(form.titre, {class : 'text-white', label : 'Titre'})}}
+{{ form_row(form.contenu, {label: 'Contenu'})}}
+{{ form_row(form.auteur, {label: 'Auteur'}) }}
+{{ form_row(form.image, {label: 'Image'}) }}
+{{ form_row(form.categories, {label: 'Catégorie'}) }}
+<input type="submit" class="btn btn-success montserrat fs-6" value="Ajouter">
+{{ form_end(form) }}

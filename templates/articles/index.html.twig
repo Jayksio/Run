@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RUN - Tous les articles
+{% endblock %}
+
+{% block body %}
+	<header>
+		<div class="video-background">
+			<div class="video-foreground">
+				<iframe src="https://www.youtube.com/embed/YSiYewXvlzU?controls=0&showinfo=0&autoplay=1&loop=1&mute=1&playlist=YSiYewXvlzU" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+
+		<div class="text-on-video">
+			<p class="text-uppercase mt-20 ms-5 helvetica fw-bold fs-1">Choisissez le meilleur</p>
+			<p class="w-text-sous-video ms-5 fs-5">Ici, divers conseils vous sont proposés afin de pouvoir vour informer sur les différents aspects de votre pratique sportive : santé, bien-être, alimentation et technique de course</p>
+			<a href="#articles" class="btn-video fs-5 ms-5 tdn">
+				Je m'informe
+			</a>
+		</div>
+	</header>
+
+	<main class="bg-gris-bleu">
+
+		<h1 id="articles" class="mt-2 hr py-5 text-uppercase">Nos articles</h1>
+
+		<section class="container">
+
+			<article class="row">
+				{% for article in articles %}
+
+					<div class="col-6 col-md-4">
+						<a class="img-wrapper" href="{{ path('app_article_show', {'id': article.id}) }}">
+							<img src="{{ article.image }}" class="article-img" alt="Article course à pied RUN">
+						</a>
+						<a class="tdn article-title" href="{{ path('app_article_show', {'id': article.id}) }}">
+							<h2 class="mt-2 text-center text-uppercase">{{ article.titre }}</h2>
+						</a>
+					</div>
+
+					<div class="col-6 col-md-8 mt-2">
+						<p class="helvetica">{{ article.contenu|striptags|slice(0, 1000) }}
+							<br><br>
+							<a href="{{ path('app_article_show', {'id': article.id}) }}">
+								<button class="bouton-voir">
+									<span class="actual-text">&nbsp;Lire&nbsp;</span>
+									<span class="hover-text" aria-hidden="true">&nbsp;Lire&nbsp;</span>
+								</button>
+							</a>
+						</p>
+
+						<p class="helvetica">Écrit par
+							<em class="text-bleu-fonce fw-bold">
+								{{ article.auteur }}</em>
+							le
+							{{ article.dateCreation|date('d/m/Y') }}
+						</p>
+					</div>
+
+					{% if not loop.last %}
+						{# j'affiche un <hr> en dessous de tous les articles, sauf le dernier #}
+						<hr>
+					{% endif %}
+				{% endfor %}
+			</article>
+		</section>
+	</main>
+	<section class="radius-bot-articles"></section>
+	{# affichage style vague #}
+
+{% endblock %}
