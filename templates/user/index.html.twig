@@ -4,85 +4,86 @@
 {% endblock %}
 
 {% block body %}
-	{% if is_granted('ROLE_ADMIN') %}
-		<main class="container">
-			<h1>Liste des utilisateurs</h1>
+{% if is_granted('ROLE_ADMIN') %}
+<main class="container">
+	<h1>Liste des utilisateurs</h1>
 
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Nom d'utilisateur</th>
-						<th>Rôle</th>
-						<th>Prénom</th>
-						<th>Nom</th>
-						<th>Mail</th>
-						<th>Genre</th>
-						<th>Niveau</th>
-						<th>Âge</th>
-						<th>Vérifié</th>
-						<th>Suppression</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for user in users %}
-						<tr>
-							<td>{{ user.id }}</td>
-							<td>{{ user.username }}</td>
-							<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-							<td>{{ user.prenom }}</td>
-							<td>{{ user.nom }}</td>
-							<td>{{ user.mail }}</td>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom d'utilisateur</th>
+				<th>Rôle</th>
+				<th>Prénom</th>
+				<th>Nom</th>
+				<th>Mail</th>
+				<th>Genre</th>
+				<th>Niveau</th>
+				<th>Âge</th>
+				<th>Vérifié</th>
+				<th>Suppression</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+			<tr>
+				<td>{{ user.id }}</td>
+				<td>{{ user.username }}</td>
+				<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+				<td>{{ user.prenom }}</td>
+				<td>{{ user.nom }}</td>
+				<td>{{ user.mail }}</td>
 
-							{% if user.genre == 0 %}
-								<td>Homme</td>
-							{% elseif user.genre == 1 %}
-								<td>Femme</td>
-							{% endif %}
-
-							{% if user.niveau == 0 %}
-								<td>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star"></i>
-									<i class="bi bi-star"></i>
-								</td>
-							{% elseif user.niveau == 1 %}
-								<td>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star"></i>
-								</td>
-							{% elseif user.niveau == 2 %}
-								<td>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i>
-									<i class="bi bi-star-fill"></i>
-								</td>
-							{% endif %}
-
-							<td>{{ user.age }}</td>
-							<td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
-							<td>
-								<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Voulez-vous supprimer cet utilisateur?');">
-									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-									<button class="btn btn-danger">Supprimer</button>
-								</form>
-							</td>
-						</tr>
-					{% else %}
-						{# s'il n'y a pas de données #}
-						<div class="alert alert-warning mx-auto w-50 my-3">
-							<p>Pas d'utilisateurs enregistrés</p>
-						</div>
-					{% endfor %}
-				{% else %}
-					<div class="alert alert-danger w-50 mx-auto text-center my-3">
-						<p class="fs-1">Il semblerait que vous vous soyez perdu...</p>
-						<a class="btn btn-dark my-3 fs-3" href="{{ path('app_home') }}">Retourner à l'accueil</a>
-					</div>
-
+				{% if user.genre == 0 %}
+				<td>Homme</td>
+				{% elseif user.genre == 1 %}
+				<td>Femme</td>
 				{% endif %}
-			</tbody>
+
+				{% if user.niveau == 0 %}
+				<td>
+					<i class="bi bi-star-fill"></i>
+					<i class="bi bi-star"></i>
+					<i class="bi bi-star"></i>
+				</td>
+				{% elseif user.niveau == 1 %}
+				<td>
+					<i class="bi bi-star-fill"></i>
+					<i class="bi bi-star-fill"></i>
+					<i class="bi bi-star"></i>
+				</td>
+				{% elseif user.niveau == 2 %}
+				<td>
+					<i class="bi bi-star-fill"></i>
+					<i class="bi bi-star-fill"></i>
+					<i class="bi bi-star-fill"></i>
+				</td>
+				{% endif %}
+
+				<td>{{ user.age }}</td>
+				<td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+				<td>
+					<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}"
+						onsubmit="return confirm('Voulez-vous supprimer cet utilisateur?');">
+						<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+						<button class="btn btn-danger"><i class="fs-5 bi bi-trash"></i></button>
+					</form>
+				</td>
+			</tr>
+			{% else %}
+			{# s'il n'y a pas de données #}
+			<div class="alert alert-warning mx-auto w-50 my-3">
+				<p>Pas d'utilisateurs enregistrés</p>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="alert alert-danger w-50 mx-auto text-center my-3">
+				<p class="fs-1">Il semblerait que vous vous soyez perdu...</p>
+				<a class="btn btn-dark my-3 fs-3" href="{{ path('app_home') }}">Retourner à l'accueil</a>
+			</div>
+
+			{% endif %}
+		</tbody>
 		</tbody>
 	</table>
 </main>{% endblock %}
