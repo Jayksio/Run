@@ -660,7 +660,7 @@ footer i {
 }
 
 footer i:hover {
-  color: var(--bleu);
+  color: var(--bleu) !important;
   transition: 0.5s;
 }
 
