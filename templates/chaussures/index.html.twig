@@ -30,7 +30,7 @@
 
 					<div style="height:500px;" {# image des cards égales #} class="card my-2">
 						<a class="img-wrapper-chaussures" href="{{ path('app_chaussures_show', {'id': chaussure.id}) }}">
-							<img src="{{ chaussure.image }}" style="height:300px; object-fit:contain;" class="card-img-top" alt="Chaussures RUN">
+							<img src="{{ chaussure.image }}" style="height:300px; object-fit:contain;" class="card-img-top" alt="Chaussures RUN {{chaussure.nom}}">
 						</a>
 						<div class="card-body">
 							<a class="titre-clic" href="{{ path('app_chaussures_show', {'id': chaussure.id}) }}">
